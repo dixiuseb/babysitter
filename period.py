@@ -9,6 +9,7 @@ class Period:
     rate=0;
 
     def __init__(self, start=1, end=1, rate=0):
+        assert(isinstance(start, int) and isinstance(end, int))
         assert(start >= 1 and start <= 12)
         self.start = start
         assert(end >= 1 and end <= 12)

@@ -25,7 +25,7 @@ class TestStringMethods(unittest.TestCase):
         with self.assertRaises(AssertionError):
             c = Period(start=13, end=10, rate=10)
 
-        with self.assertRaises(TypeError):
+        with self.assertRaises(AssertionError):
             c = Period(start="time", end=10, rate=10)
 
         with self.assertRaises(AssertionError):
@@ -34,7 +34,7 @@ class TestStringMethods(unittest.TestCase):
         with self.assertRaises(AssertionError):
             c = Period(start=1, end=13, rate=10)
 
-        with self.assertRaises(TypeError):
+        with self.assertRaises(AssertionError):
             c = Period(start=1, end="time", rate=10)
 
     def test_duration(self):
@@ -52,9 +52,6 @@ class TestStringMethods(unittest.TestCase):
             a = BeforeBed(start=5, end=4)
 
         with self.assertRaises(AssertionError):
-            a = BeforeBed(start=5, end=12)
-
-        with self.assertRaises(AssertionError):
             a = BeforeBed(start=7, end=7)
 
         a = BeforeBed(start=5, end=7)
@@ -67,8 +64,8 @@ class TestStringMethods(unittest.TestCase):
         with self.assertRaises(AssertionError):
             a = BedToMidnight(start=12)
 
-        with self.assertRaises(AssertionError):
-            a = BedToMidnight(start=1)
+        a = BedToMidnight(start=1)
+        self.assertEqual(a.value(), 0)
 
         a = BedToMidnight(start=6)
         self.assertEqual(a.value(), 48)
@@ -97,9 +94,6 @@ class TestStringMethods(unittest.TestCase):
             a = Night(bedtime=4)
 
         with self.assertRaises(AssertionError):
-            a = Night(bedtime=12)
-
-        with self.assertRaises(AssertionError):
             a = Night(end=5)
 
         with self.assertRaises(AssertionError):
@@ -113,6 +107,15 @@ class TestStringMethods(unittest.TestCase):
 
         a = Night(start=7, bedtime=11, end=3)
         self.assertEqual(a.earnings(), 104)
+
+        a = Night(start=7, bedtime=8, end=9)
+        self.assertEqual(a.earnings(), 20)
+
+        a = Night(start=7, bedtime=10, end=8)
+        self.assertEqual(a.earnings(), 12)
+
+        a = Night(start=7, bedtime=1, end=4)
+        self.assertEqual(a.earnings(), 124)
 
 if __name__ == '__main__':
     unittest.main()

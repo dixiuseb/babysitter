@@ -1,15 +1,21 @@
 
-print("------------- Babysitter Pay Calculator -------------")
-print("Enter all times as integers (ex: \"9\" for 9:00 PM)\n")
-print("Start time must be 5:00 PM or later\n")
-print("End time must be 4:00 AM or earlier\n")
-print("Any number >= 5 will be assumed to be PM, any\n")
-print("number <= 4 will be assumed to be AM\n")
+from night import Night
+
+print("------------- Babysitter Pay Calculator -------------\n")
+print("Enter all times as integers (ex: \"9\" for 9:00 PM)")
+print("Start time must be 5:00 PM or later")
+print("End time must be 4:00 AM or earlier")
+print("Any number >= 5 will be assumed to be PM, any")
+print("number <= 4 will be assumed to be AM")
 print("")
 
-print("Enter start time: ")
-start = read()
+start = input("Enter start time: ")
 
+bedtime = input("Enter bedtime: ")
 
-print("Enter bedtime: ")
-bedtime = read()
+end = input("Enter end time: ")
+
+earnings = Night(start=int(start), bedtime=int(bedtime), end=int(end)).earnings()
+
+print("")
+print("Earnings for the night: " + str(earnings))
