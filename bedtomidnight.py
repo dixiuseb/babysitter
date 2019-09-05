@@ -4,11 +4,11 @@ from period import Period
 
 class BedToMidnight(Period):
 
-    def __init__(self, start=5, end=12):
-        assert(start >= 5)
+    def __init__(self, start=6):
+        assert(start >= 6 and start < 12)
         self.start = start
 
-        assert(end >= 6)
-        self.end = end
-
+        self.end = 12
         self.rate = 8
+
+    

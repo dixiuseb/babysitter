@@ -2,6 +2,8 @@ import unittest
 
 from period import Period
 from beforebed import BeforeBed
+from bedtomidnight import BedToMidnight
+from midnighttoend import MidnightToEnd
 
 class TestStringMethods(unittest.TestCase):
 
