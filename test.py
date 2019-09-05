@@ -4,6 +4,7 @@ from period import Period
 from beforebed import BeforeBed
 from bedtomidnight import BedToMidnight
 from midnighttoend import MidnightToEnd
+from night import Night
 
 class TestStringMethods(unittest.TestCase):
 
@@ -74,6 +75,9 @@ class TestStringMethods(unittest.TestCase):
 
     def test_MidnightToEnd(self):
         with self.assertRaises(AssertionError):
+            a = MidnightToEnd(end=-1)
+
+        with self.assertRaises(AssertionError):
             a = MidnightToEnd(end=12)
 
         with self.assertRaises(AssertionError):
@@ -83,7 +87,32 @@ class TestStringMethods(unittest.TestCase):
             a = MidnightToEnd(end=13)
 
         a = MidnightToEnd(end=3)
-        self.assertEqual(a.value(), 54)
+        self.assertEqual(a.value(), 48)
+
+    def testNight(self):
+        with self.assertRaises(AssertionError):
+            a = Night(start=4)
+
+        with self.assertRaises(AssertionError):
+            a = Night(bedtime=4)
+
+        with self.assertRaises(AssertionError):
+            a = Night(bedtime=12)
+
+        with self.assertRaises(AssertionError):
+            a = Night(end=5)
+
+        with self.assertRaises(AssertionError):
+            a = Night(start=5, bedtime=5)
+
+        with self.assertRaises(AssertionError):
+            a = Night(bedtime=11, end=12)
+
+        with self.assertRaises(AssertionError):
+            a = Night(bedtime=11, end=5)
+
+        a = Night(start=7, bedtime=11, end=3)
+        self.assertEqual(a.earnings(), 104)
 
 if __name__ == '__main__':
     unittest.main()

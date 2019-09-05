@@ -10,5 +10,3 @@ class BedToMidnight(Period):
 
         self.end = 12
         self.rate = 8
-
-    
