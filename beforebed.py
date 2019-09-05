@@ -8,5 +8,7 @@ class BeforeBed(Period):
         assert(start >= 5)
         self.start = start
 
-        assert(end >= 6)
+        assert(end > start and end < 12)
         self.end = end
+
+        self.rate = 12

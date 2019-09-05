@@ -1,6 +1,7 @@
 import unittest
 
 from period import Period
+from beforebed import BeforeBed
 
 class TestStringMethods(unittest.TestCase):
 
@@ -39,6 +40,48 @@ class TestStringMethods(unittest.TestCase):
         self.assertEqual(a.relativeTime(9), 9)
         self.assertEqual(a.duration(), 4)
 
+
+    def test_BeforeBed(self):
+        with self.assertRaises(AssertionError):
+            a = BeforeBed(start=4, end=9)
+
+        with self.assertRaises(AssertionError):
+            a = BeforeBed(start=5, end=4)
+
+        with self.assertRaises(AssertionError):
+            a = BeforeBed(start=5, end=12)
+
+        with self.assertRaises(AssertionError):
+            a = BeforeBed(start=7, end=7)
+
+        a = BeforeBed(start=5, end=7)
+        self.assertEqual(a.value(), 24)
+
+    def test_BedToMidnight(self):
+        with self.assertRaises(AssertionError):
+            a = BedToMidnight(start=5)
+
+        with self.assertRaises(AssertionError):
+            a = BedToMidnight(start=12)
+
+        with self.assertRaises(AssertionError):
+            a = BedToMidnight(start=1)
+
+        a = BedToMidnight(start=6)
+        self.assertEqual(a.value(), 48)
+
+    def test_MidnightToEnd(self):
+        with self.assertRaises(AssertionError):
+            a = MidnightToEnd(end=12)
+
+        with self.assertRaises(AssertionError):
+            a = MidnightToEnd(end=5)
+
+        with self.assertRaises(AssertionError):
+            a = MidnightToEnd(end=13)
+
+        a = MidnightToEnd(end=3)
+        self.assertEqual(a.value(), 54)
 
 if __name__ == '__main__':
     unittest.main()

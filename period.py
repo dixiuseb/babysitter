@@ -16,6 +16,8 @@ class Period:
         assert(rate >= 0)
         self.rate = rate
 
+    def value(self):
+        return self.duration() * self.rate
 
     def duration(self):
         return self.relativeTime(self.end) - self.relativeTime(self.start)
